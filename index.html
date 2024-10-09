@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
+
+    <body>
+    <section id="main">
+        <img class="background" src="./assests/movies.jpg">
+            <div class="header">
+                <div class="header-title">
+                    <i class="fa fa-video-camera"></i>
+                    <a href=""></a>
+                    <div class="header-options">
+                            <a href="" class="underline">Home</a>
+                            <a href="" class="underline">Find Your Movie</a>
+                            <a href=""><button class="btn">Contact</button></a>
+                        </div>
+                            <div class="menu">
+                                <button class="btn__menu" onclick="openMenu()">
+                                    <i class="fa fa-bars"></i>
+                                </button>
+                                <div class="menu__backdrop">
+                                    <button class="btn__menu btn__menu--close" onclick="closeMenu()">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                                <ul class="menu__links">
+                                 <li class="menu__list">
+                                    <a href="#" class="menu__link" onclick="closeMenu()">Home</a>
+                                </li>
+                                <li class="menu__list">
+                                    <a href="#" class="menu__link" onclick="closeMenu()">Find Your Movie</a>
+                                </li>
+                                <li class="menu__list">
+                                    <a href="#" class="menu__link" onclick="closeMenu()">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                     </div>
+                    </div>
+                </div>
+            </div>
+            <div class="title">
+                <h1 class="main-title">BEST MOVIES</h1>
+                <div class="search">
+                    <input type="text" id="searchInput" placeholder="Search Movie"> 
+                    <button id="searchBtn"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+    </section>
+    <section id="body">
+        <div class="movies">
+            <div class="results">
+                <div id="spinner" class="spinner"><i class="fa fa-spinner fa-spin"></i></div>
+                <h2 id="searchTitle">MOVIES</h2>
+            </div>
+        </div>
+        <div class="movie">
+            <div class="movie-card">
+                <div class="movie-card_container">
+                    <img class="poster" src="" alt="">
+                    <p>Title</p>
+                    <p>Year:</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <button id="backToTop" class="back-to-top"><i class="fa fa-arrow-up"></i></button>
+    </body>
+    <script src="index.js"></script>
+</html>
