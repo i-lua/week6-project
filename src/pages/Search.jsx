@@ -92,6 +92,33 @@ const Search = () => {
     document.body.classList.remove("menu--open");
   };
 
+  // Skeleton loading component
+  const Skeleton = () => (
+    <div className="skeleton">
+      <div className="skeleton-poster"></div>
+      <div className="skeleton-text"></div>
+      <div className="skeleton-text"></div>
+    </div>
+  )
+
+  // Filter options
+  const handleCombinedFilter = (e) => {
+    const filterType = e.target.value
+    let sortedMovies = [...movies]
+
+    if (filterType === 'oldest') {
+      sortedMovies.sort((a, b) => parseInt(a.Year, 10) - parseInt(b.Year, 10))
+    } else if (filterType === 'newest') {
+      sortedMovies.sort((a, b) => parseInt(b.Year,10) - parseInt(a.Year, 10))
+    } else if (filterType === 'asc') {
+      sortedMovies.sort((a, b) => a.Title.localeCompare(b.Title))
+    } else if (filterType === 'desc') {
+      sortedMovies.sort((a, b) => b.Title.localeCompare(a.Title))
+    }
+
+    setMovies(sortedMovies)
+  }
+
   return (
     <>
       <div id="main">
@@ -103,7 +130,7 @@ const Search = () => {
               <Link className="underline" to="/">
                 Home
               </Link>
-              <Link className="underline" to="/">
+              <Link className="underline" to="/Search">
                 Find Your Movie
               </Link>
               <Link to="/">
@@ -165,7 +192,11 @@ const Search = () => {
               onKeyPress={(e) => e.key === "Enter" && handleSearch()}
             />
             <button id="searchBtn" onClick={handleSearch}>
+            {loading ? (
+              <i className="fa fa-spinner fa-spin"></i>
+            ) : (
               <i className="fa fa-search"></i>
+              )}  
             </button>
           </div>
         </div>
@@ -173,12 +204,10 @@ const Search = () => {
 
       <div id="body">
         {loading ? (
-          <div
-            id="spinner"
-            className="spinner"
-            style={{ visibility: "visible" }}
-          >
-            <i className="fa fa-spinner fa-spin"></i>
+          <div className="skeleton-container">
+            {[1, 2, 3, 4].map((_, index) => (
+              <Skeleton key={index} />
+            ))}
           </div>
         ) : (
           <>
@@ -194,7 +223,17 @@ const Search = () => {
                 ) : (
                   "MOVIES"
                 )}
+              <div className="filter-bar">
+                <select id="combinedFilter" onChange={handleCombinedFilter}>
+                  <option value=''>FILTER</option>
+                  <option value='oldest'>Oldest to Newest</option>
+                  <option value='newest'>Newest to Oldest</option>
+                  <option value='asc'>A-Z</option>
+                  <option value='desc'>Z-A</option>
+                </select>
+              </div>
               </h2>
+
               <div className="results">
                 {movies.map((movie) => (
                   <div className="movie" key={movie.imdbID}>

@@ -221,6 +221,9 @@ input {
   background: none;
   border: none;
 }
+.fa-search {
+    transition: 500ms ease-in-out;
+}
 .fa-search:hover {
   cursor: pointer;
   color: turquoise;
@@ -234,11 +237,76 @@ input {
   text-align: center;
 }
 
+.filter-bar {
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+    position: relative;
+    bottom: 30px;
+    right: 20px;
+}
+#combinedFilter {
+    transition: 500ms ease-in-out;
+    border-radius: 15px;
+    text-align: center;
+    appearance: none;
+}
+#combinedFilter:hover {
+    cursor: pointer;
+    background-color: #242424;
+    color: white;
+    transition: 500ms ease-in-out;
+}
+
+select {
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+}
+
 .results {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   padding-bottom: 50px;
+}
+
+.skeleton-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-bottom: 50px;
+    padding-top: 150px;
+    padding-right: 50px;
+    padding-left: 50px;
+}
+
+.skeleton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+}
+
+.skeleton-poster {
+    width: 300px;
+    height: 445px;
+    background-color: #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding: 35px;
+    margin-right: 15px;
+    margin-left: 15px;
+    text-align: center;
+}
+
+.skeleton-text {
+    width: 120px;
+    height: 15px;
+    background-color: #ddd;
+    border-radius: 4px;
+    margin-bottom: 5px;
 }
 
 #spinner {
@@ -334,4 +402,21 @@ p {
   .header-options {
     display: none;
   }
+
+  .filter-bar{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0px;
+    gap: 10px;
+    top: 0px;
+  }
 }
+
+
+/* HOME PAGE */
+
+
+
+
