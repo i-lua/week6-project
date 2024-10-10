@@ -72,14 +72,18 @@ h1 {
 }
 .btn__menu:hover {
     cursor: pointer;
+    color: turquoise;
+    transform: scale(1.1);
 }
 
 .btn__menu {
+    display: none;
     background-color: transparent;
     font-size: 40px;
     border: none;
     color: black;
     display: none;
+    transition: 500ms ease-in-out;
 }
 
 .menu__backdrop {
@@ -87,19 +91,20 @@ h1 {
     background-color: #242424;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100%;
+    height: 100%;
     z-index: 100;
     display: flex;
     align-items: center;
     justify-content: center;
     visibility: hidden;
     transition: all 500ms ease;
-    opacity: 0;
     transform: translate(100%);
+    opacity: 0;
 }
 
 .menu--open {
+    display: flex;
     max-height: 100vh;
     overflow: hidden;
 }
@@ -118,17 +123,28 @@ h1 {
 
 .menu__list {
     padding: 32px 0;
+    list-style-type: none;
 }
 
 .menu__link {
-    color: white;
     font-size: 40px;
+    color: white;
+    background: transparent; 
+    border: none;
+    transition: 500ms ease-in-out;
+}
+
+.menu__link:hover {
+    cursor: pointer;
+    color: turquoise;
+    transform: scale(1.1);
 }
 
 .btn__menu--close {
     position: absolute;
     top: 10px;
     right: 20px;
+    font-size: 30px;
     padding: 8px;
     color: black;
 }
@@ -209,7 +225,7 @@ input {
 }
 .fa-search:hover {
     cursor: pointer;
-    color: greenyellow;
+    color: turquoise;
     transition: 500ms ease-in-out;
 }
 
@@ -217,15 +233,18 @@ input {
 
 .movies {
     padding-top: 150px;
+    text-align: center;
 }
 
 .results {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     padding-bottom: 50px;
 }
 
-.spinner {
+
+#spinner {
     display: none;
     font-size: 100px;
     color: black;
@@ -252,7 +271,7 @@ input {
 .movie {
     display: flex;
     justify-content: space-evenly;
-    flex-wrap: wrap;
+    flex: wrap;
     transition: opacity 500ms ease-in-out;
 }
 
@@ -304,13 +323,14 @@ p {
 }
 
 /* SMALL DISPLAY */
-@media (max-width: 550px) {
+@media (max-width: 768px) {
     .btn__menu {
         display: block;
     }
 
     .header-title {
-        justify-content: space-around;
+        padding-right: 20px;
+        justify-content: space-between;
     }
 
     .header-options {
