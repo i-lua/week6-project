@@ -85,15 +85,12 @@ const Search = () => {
   };
 
   const openMenu = () => {
-    document.body.classList += " menu--open"
-  }
+    document.body.classList += " menu--open";
+  };
 
   const closeMenu = () => {
-    document.body.classList.remove('menu--open')
-  }
-
- 
-
+    document.body.classList.remove("menu--open");
+  };
 
   return (
     <>
@@ -118,7 +115,7 @@ const Search = () => {
               <button className="btn__menu" onClick={openMenu}>
                 <i className="fa fa-bars"></i>
               </button>
-              <div className='menu__backdrop'>
+              <div className="menu__backdrop">
                 <button
                   className="btn__menu btn__menu--close"
                   onClick={closeMenu}
@@ -176,7 +173,11 @@ const Search = () => {
 
       <div id="body">
         {loading ? (
-          <div id="spinner" className="spinner">
+          <div
+            id="spinner"
+            className="spinner"
+            style={{ visibility: "visible" }}
+          >
             <i className="fa fa-spinner fa-spin"></i>
           </div>
         ) : (
