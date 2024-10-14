@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import "font-awesome/css/font-awesome.min.css";
 import bgimage from "./assets/movies.jpg";
@@ -11,9 +11,21 @@ const Search = () => {
   const [loading, setLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [searchParams] = useSearchParams();
+  const searchQTerm = searchParams.get("query");
 
   const apiKey = "5efc08a5";
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (searchQTerm) {
+      searchMovies(searchQTerm);
+      setSearchTerm(searchQTerm)
+    } else {
+      setMovies([])
+      setHasSearched(false)
+    }
+  }, [searchQTerm]);
 
   useEffect(() => {
     fetchSuggestions();
@@ -48,6 +60,7 @@ const Search = () => {
         setDisplayedSearchTerm(term);
       } else {
         setMovies([]);
+        setHasSearched(true)
       }
     } catch (error) {
       console.error("Error searching movies:", error);
@@ -99,25 +112,25 @@ const Search = () => {
       <div className="skeleton-text"></div>
       <div className="skeleton-text"></div>
     </div>
-  )
+  );
 
   // Filter options
   const handleCombinedFilter = (e) => {
-    const filterType = e.target.value
-    let sortedMovies = [...movies]
+    const filterType = e.target.value;
+    let sortedMovies = [...movies];
 
-    if (filterType === 'oldest') {
-      sortedMovies.sort((a, b) => parseInt(a.Year, 10) - parseInt(b.Year, 10))
-    } else if (filterType === 'newest') {
-      sortedMovies.sort((a, b) => parseInt(b.Year,10) - parseInt(a.Year, 10))
-    } else if (filterType === 'asc') {
-      sortedMovies.sort((a, b) => a.Title.localeCompare(b.Title))
-    } else if (filterType === 'desc') {
-      sortedMovies.sort((a, b) => b.Title.localeCompare(a.Title))
+    if (filterType === "oldest") {
+      sortedMovies.sort((a, b) => parseInt(a.Year, 10) - parseInt(b.Year, 10));
+    } else if (filterType === "newest") {
+      sortedMovies.sort((a, b) => parseInt(b.Year, 10) - parseInt(a.Year, 10));
+    } else if (filterType === "asc") {
+      sortedMovies.sort((a, b) => a.Title.localeCompare(b.Title));
+    } else if (filterType === "desc") {
+      sortedMovies.sort((a, b) => b.Title.localeCompare(a.Title));
     }
 
-    setMovies(sortedMovies)
-  }
+    setMovies(sortedMovies);
+  };
 
   return (
     <>
@@ -192,11 +205,11 @@ const Search = () => {
               onKeyPress={(e) => e.key === "Enter" && handleSearch()}
             />
             <button id="searchBtn" onClick={handleSearch}>
-            {loading ? (
-              <i className="fa fa-spinner fa-spin"></i>
-            ) : (
-              <i className="fa fa-search"></i>
-              )}  
+              {loading ? (
+                <i className="fa fa-spinner fa-spin"></i>
+              ) : (
+                <i className="fa fa-search"></i>
+              )}
             </button>
           </div>
         </div>
@@ -223,15 +236,15 @@ const Search = () => {
                 ) : (
                   "MOVIES"
                 )}
-              <div className="filter-bar">
-                <select id="combinedFilter" onChange={handleCombinedFilter}>
-                  <option value=''>FILTER</option>
-                  <option value='oldest'>Oldest to Newest</option>
-                  <option value='newest'>Newest to Oldest</option>
-                  <option value='asc'>A-Z</option>
-                  <option value='desc'>Z-A</option>
-                </select>
-              </div>
+                <div className="filter-bar">
+                  <select id="combinedFilter" onChange={handleCombinedFilter}>
+                    <option value="">FILTER</option>
+                    <option value="oldest">Oldest to Newest</option>
+                    <option value="newest">Newest to Oldest</option>
+                    <option value="asc">A-Z</option>
+                    <option value="desc">Z-A</option>
+                  </select>
+                </div>
               </h2>
 
               <div className="results">

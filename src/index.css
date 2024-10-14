@@ -226,7 +226,7 @@ input {
 }
 .fa-search:hover {
   cursor: pointer;
-  color: turquoise;
+  color: #40e0d0;
   transition: 500ms ease-in-out;
 }
 
@@ -417,6 +417,17 @@ p {
 
 /* HOME PAGE */
 
+.header {
+  padding-top: 25px;
+  padding-right: 100px;
+  padding-left: 100px;
+  padding-bottom: 25px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+}
 
 
 
