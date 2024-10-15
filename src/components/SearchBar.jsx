@@ -2,14 +2,16 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const SearchBar = ({ loading, setLoading, searchTerm, setSearchTerm }) => {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
 
-    const handleSearch = () => {
-        if(searchTerm) {
-            setLoading(true)
-            navigate(`/Search?query=${encodeURIComponent(searchTerm)}`)
-        }
+  const handleSearch = () => {
+    if (searchTerm) {
+      setLoading(true);
+      navigate(`/Search?query=${encodeURIComponent(searchTerm)}`, {
+        replace: true,
+      });
     }
+  };
   return (
     <div className="search">
       <input

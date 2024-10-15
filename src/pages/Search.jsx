@@ -18,12 +18,9 @@ const Search = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (searchQTerm) {
+    if (searchQTerm && searchQTerm !== "") {
       searchMovies(searchQTerm);
-      setSearchTerm(searchQTerm)
-    } else {
-      setMovies([])
-      setHasSearched(false)
+      setSearchTerm(searchQTerm);
     }
   }, [searchQTerm]);
 
@@ -60,7 +57,7 @@ const Search = () => {
         setDisplayedSearchTerm(term);
       } else {
         setMovies([]);
-        setHasSearched(true)
+        setHasSearched(true);
       }
     } catch (error) {
       console.error("Error searching movies:", error);
@@ -70,7 +67,9 @@ const Search = () => {
 
   const handleSearch = () => {
     if (searchTerm) {
-      searchMovies(searchTerm);
+      navigate(`/Search?query=${encodeURIComponent(searchTerm)}`, {
+        replace: false,
+      });
     }
   };
 
@@ -250,7 +249,7 @@ const Search = () => {
               <div className="results">
                 {movies.map((movie) => (
                   <div className="movie" key={movie.imdbID}>
-                    <div key={movie.imdbID} className="movie-card">
+                    <Link to={`/movie/${movie.imdbID}`} className="movie-card">
                       <div className="movie-card_container">
                         <img
                           className="poster"
@@ -260,7 +259,7 @@ const Search = () => {
                         <p>{movie.Title}</p>
                         <p>({movie.Year})</p>
                       </div>
-                    </div>
+                    </Link>
                   </div>
                 ))}
               </div>
