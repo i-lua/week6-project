@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
-import homeMovie from './assets/homeMovie.jpg'
+import homeMovie from './assets/BMSLogo.webp'
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
@@ -17,14 +17,27 @@ const Home = () => {
     }
   };
 
+  // Handle navigation in hamburger menu
+  const handleNavigate = (path) => {
+    navigate(path);
+    closeMenu();
+  };
+
+  const openMenu = () => {
+    document.body.classList += " menu--open";
+  };
+
+  const closeMenu = () => {
+    document.body.classList.remove("menu--open");
+  };
+
   return (
     <>
       <div className="header">
         <div className="header-container">
           <i className="fa fa-video-camera">
-            <span>Best Movies</span>
+            <span className="black">BMS</span>
           </i>{" "}
-          *// fix this quote
           <div className="header-options">
             <span className="underline-current">
               Home
@@ -36,15 +49,56 @@ const Home = () => {
               <button className="btn">Contact</button>
             </Link>
           </div>
+      <div className="menu">
+              <button className="btn__menu" onClick={openMenu}>
+                <i className="fa fa-bars"></i>
+              </button>
+              <div className="menu__backdrop">
+                <button
+                  className="btn__menu btn__menu--close"
+                  onClick={closeMenu}
+                >
+                  <i className="fa fa-times"></i>
+                </button>
+                <ul className="menu__links">
+                  <li className="menu__list">
+                    <button
+                      className="menu__link"
+                      onClick={() => handleNavigate("/")}
+                    >
+                      Home
+                    </button>
+                  </li>
+                  <li className="menu__list">
+                    <button
+                      className="menu__link"
+                      onClick={() => handleNavigate("/Search")}
+                    >
+                      Find Your Movie
+                    </button>
+                  </li>
+                  <li className="menu__list">
+                    <button
+                      className="menu__link"
+                      onClick={() => handleNavigate("/")}
+                    >
+                      Contact
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
         </div>
       </div>
+
+
       <div className="body">
         <div className="body-container">
-          <h1>
-            Find the Movie that speaks to you. One search away, infinite
+          <h1 className="main-title">
+          Find the film that ignites your passion. One search away, infinite
             adventures.{" "}
           </h1>
-          <h2>SEARCH FOR YOUR MOVIE WITH ...</h2>
+          <h2 className="main-title subtitle">SEARCH FOR YOUR MOVIE WITH <span className="green">BMS</span></h2>
           <SearchBar
             loading={loading}
             setLoading={setLoading}

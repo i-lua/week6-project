@@ -45,7 +45,7 @@ const Movie = () => {
   return (
     <div className="movie-details">
       <button className='back-arrow' onClick={goBack}><i className='fa fa-arrow-circle-left'></i></button>
-      <img src={movie.Poster} alt={movie.Title} />
+      <img className='movie-poster' src={movie.Poster} alt={movie.Title} />
       <div className="movie-details--info">
       <h1>{movie.Title}</h1>
       <p className='movie-info'><strong>Plot: </strong>{movie.Plot || 'Plot information not available'}</p>

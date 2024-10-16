@@ -18,11 +18,17 @@ const Search = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (searchQTerm && searchQTerm !== "") {
-      searchMovies(searchQTerm);
-      setSearchTerm(searchQTerm);
-    }
-  }, [searchQTerm]);
+      if (searchQTerm && searchQTerm.trim() !== "") {
+        searchMovies(searchQTerm);
+        setSearchTerm(searchQTerm);
+      } else {
+        setMovies([])
+      }
+    }, [searchQTerm])
+
+  // useEffect(() => {
+  //   setMovies([])
+  // }, [])
 
   useEffect(() => {
     fetchSuggestions();
@@ -47,9 +53,7 @@ const Search = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(
-          term
-        )}`
+        `https://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(term)}`
       );
       if (response.data.Response === "True") {
         setMovies(response.data.Search);
@@ -67,6 +71,7 @@ const Search = () => {
 
   const handleSearch = () => {
     if (searchTerm) {
+      setLoading(true)
       navigate(`/Search?query=${encodeURIComponent(searchTerm)}`, {
         replace: false,
       });
@@ -142,9 +147,9 @@ const Search = () => {
               <Link className="underline" to="/">
                 Home
               </Link>
-              <Link className="underline" to="/Search">
-                Find Your Movie
-              </Link>
+              <span className="underline-current">
+              Find Your Movie
+            </span>
               <Link to="/">
                 <button className="btn">Contact</button>
               </Link>
