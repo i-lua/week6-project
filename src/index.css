@@ -466,8 +466,8 @@ p {
 
 .subtitle {
   font-style: italic;
-  -webkit-text-stroke: .2px whitesmoke;
-  color: black;
+  -webkit-text-stroke: .8px black;
+  color: white;
   font-weight: 1000;
 }
 
