@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
 import homeMovie from './assets/BMSLogo.webp'
+import MenuBar from "../components/MenuBar";
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
@@ -12,23 +13,9 @@ const Home = () => {
     if (searchTerm && searchTerm.trim() !== "") {
       setLoading(true);
       navigate(`/Search?query=${encodeURIComponent(searchTerm)}`, {
-        replace: false,
+        replace: false
       });
     }
-  };
-
-  // Handle navigation in hamburger menu
-  const handleNavigate = (path) => {
-    navigate(path);
-    closeMenu();
-  };
-
-  const openMenu = () => {
-    document.body.classList += " menu--open";
-  };
-
-  const closeMenu = () => {
-    document.body.classList.remove("menu--open");
   };
 
   return (
@@ -49,45 +36,7 @@ const Home = () => {
               <button className="btn">Contact</button>
             </Link>
           </div>
-      <div className="menu">
-              <button className="btn__menu" onClick={openMenu}>
-                <i className="fa fa-bars"></i>
-              </button>
-              <div className="menu__backdrop">
-                <button
-                  className="btn__menu btn__menu--close"
-                  onClick={closeMenu}
-                >
-                  <i className="fa fa-times"></i>
-                </button>
-                <ul className="menu__links">
-                  <li className="menu__list">
-                    <button
-                      className="menu__link"
-                      onClick={() => handleNavigate("/")}
-                    >
-                      Home
-                    </button>
-                  </li>
-                  <li className="menu__list">
-                    <button
-                      className="menu__link"
-                      onClick={() => handleNavigate("/Search")}
-                    >
-                      Find Your Movie
-                    </button>
-                  </li>
-                  <li className="menu__list">
-                    <button
-                      className="menu__link"
-                      onClick={() => handleNavigate("/")}
-                    >
-                      Contact
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            </div>
+     <MenuBar />
         </div>
       </div>
 

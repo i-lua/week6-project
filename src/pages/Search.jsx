@@ -3,6 +3,8 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import "font-awesome/css/font-awesome.min.css";
 import bgimage from "./assets/movies.jpg";
+import MenuBar from "../components/MenuBar";
+import SearchBar from "../components/SearchBar";
 
 const Search = () => {
   const [movies, setMovies] = useState([]);
@@ -25,10 +27,6 @@ const Search = () => {
         setMovies([])
       }
     }, [searchQTerm])
-
-  // useEffect(() => {
-  //   setMovies([])
-  // }, [])
 
   useEffect(() => {
     fetchSuggestions();
@@ -69,14 +67,10 @@ const Search = () => {
     setLoading(false);
   };
 
-  const handleSearch = () => {
-    if (searchTerm) {
-      setLoading(true)
-      navigate(`/Search?query=${encodeURIComponent(searchTerm)}`, {
-        replace: false,
-      });
-    }
-  };
+  const handleNavigateToSearch = () => {
+    navigate('/Search')
+    window.location.reload()
+  }
 
   // Scroll event handler to toggle back to top button visibility
   const handleScroll = () => {
@@ -93,20 +87,6 @@ const Search = () => {
       top: 0,
       behavior: "smooth",
     });
-  };
-
-  // Handle navigation in hamburger menu
-  const handleNavigate = (path) => {
-    navigate(path);
-    closeMenu();
-  };
-
-  const openMenu = () => {
-    document.body.classList += " menu--open";
-  };
-
-  const closeMenu = () => {
-    document.body.classList.remove("menu--open");
   };
 
   // Skeleton loading component
@@ -147,75 +127,25 @@ const Search = () => {
               <Link className="underline" to="/">
                 Home
               </Link>
-              <span className="underline-current">
+              <button className="underline-current" onClick={handleNavigateToSearch}>
               Find Your Movie
-            </span>
+            </button>
               <Link to="/">
                 <button className="btn">Contact</button>
               </Link>
             </div>
-
-            <div className="menu">
-              <button className="btn__menu" onClick={openMenu}>
-                <i className="fa fa-bars"></i>
-              </button>
-              <div className="menu__backdrop">
-                <button
-                  className="btn__menu btn__menu--close"
-                  onClick={closeMenu}
-                >
-                  <i className="fa fa-times"></i>
-                </button>
-                <ul className="menu__links">
-                  <li className="menu__list">
-                    <button
-                      className="menu__link"
-                      onClick={() => handleNavigate("/")}
-                    >
-                      Home
-                    </button>
-                  </li>
-                  <li className="menu__list">
-                    <button
-                      className="menu__link"
-                      onClick={() => handleNavigate("/Search")}
-                    >
-                      Find Your Movie
-                    </button>
-                  </li>
-                  <li className="menu__list">
-                    <button
-                      className="menu__link"
-                      onClick={() => handleNavigate("/")}
-                    >
-                      Contact
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <MenuBar />
           </div>
         </div>
 
         <div className="title">
           <h1 className="main-title">BEST MOVIES</h1>
-          <div className="search">
-            <input
-              type="text"
-              id="searchInput"
-              placeholder="Search Movie"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && handleSearch()}
-            />
-            <button id="searchBtn" onClick={handleSearch}>
-              {loading ? (
-                <i className="fa fa-spinner fa-spin"></i>
-              ) : (
-                <i className="fa fa-search"></i>
-              )}
-            </button>
-          </div>
+          <SearchBar 
+          loading={loading}
+          setLoading={setLoading}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          />
         </div>
       </div>
 

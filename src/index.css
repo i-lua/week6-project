@@ -483,6 +483,14 @@ p {
 .underline-current {
   text-decoration: underline;
   color: silver;
+  border: none;
+  background-color: transparent;
+  font-size: large;
+  cursor: pointer;
+  transition: 500ms ease-in-out;
+}
+.underline-current:hover {
+  color: #40e0d0;
 }
 
 .black {
